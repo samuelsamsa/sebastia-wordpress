@@ -246,6 +246,28 @@ add_action('save_post_entry', function (int $post_id): void {
     }
 });
 
+// ─── Force HTTPS for all output when behind Local's live link tunnel ─────────
+// The tunnel's nginx swaps the domain (localhost:PORT → tunnel host) but does
+// not upgrade http:// to https://. We buffer the full page output and do both
+// replacements before the response is handed to nginx.
+add_action('template_redirect', function (): void {
+    if (empty($_SERVER['HTTP_X_ORIGINAL_HOST'])) {
+        return;
+    }
+    global $wpdb;
+    $tunnel_host = $_SERVER['HTTP_X_ORIGINAL_HOST'];
+    $raw_siteurl = $wpdb->get_var(
+        $wpdb->prepare("SELECT option_value FROM {$wpdb->options} WHERE option_name = %s", 'siteurl')
+    );
+    ob_start(function (string $buffer) use ($tunnel_host, $raw_siteurl): string {
+        if ($raw_siteurl) {
+            $buffer = str_replace($raw_siteurl, 'https://' . $tunnel_host, $buffer);
+        }
+        $buffer = str_replace('http://' . $tunnel_host, 'https://' . $tunnel_host, $buffer);
+        return $buffer;
+    });
+}, 1);
+
 // ─── Language switcher URL ────────────────────────────────────────────────────
 function sebastia_lang_url(string $lang): string {
     if (function_exists('pll_home_url') && is_singular()) {
