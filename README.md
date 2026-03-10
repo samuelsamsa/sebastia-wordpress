@@ -1,8 +1,5 @@
 # Sebastia — WordPress site
 
-WordPress site for Jumana Manna's artwork project. Converted from Kirby CMS.
-
----
 
 ## What's in this repo
 
