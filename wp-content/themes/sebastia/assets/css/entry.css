@@ -235,7 +235,7 @@ font-family: 'Arketa', sans-serif;
   background-color: var(--highlight);
   transition: all 0.2s ease-in-out;
   padding: 0 0.2em;
-  font-family: 'Install';
+  font-family: Install, sans-serif;
   transform: translateX(0);
 }
 
@@ -253,7 +253,7 @@ font-family: 'Arketa', sans-serif;
   font-size: 0.9em;
     color: var(--blue);
     text-transform: uppercase;
-    font-family: Install;
+    font-family: Install, sans-serif;
 }
 
 .entry-card .gallery {

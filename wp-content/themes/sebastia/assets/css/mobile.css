@@ -433,26 +433,42 @@
 
   .entry .section1 .entry-mosaic:not(:has(#map)),
   .entry .entry-main-panel .entry-mosaic:not(:has(#map)) {
-    padding: 0;
+    padding: 1rem;
     min-height: 0;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: visible;
+    display: block;
   }
 
-  .entry .section1 .entry-mosaic:not(:has(#map)) svg,
-  .entry .entry-main-panel .entry-mosaic:not(:has(#map)) svg {
-    /* Natural height = container width so that after 90° rotation
-       the visual width fills the full screen.
-       Natural width = 182vw (aspect 9967/5472), natural height = 100vw.
-       Flex centering ensures the middle strip of the mosaic is visible. */
-    display: block;
-    height: 100vw;
-    width: auto;
-    max-width: none;
-    flex-shrink: 0;
+  /* Portrait wrapper: reserves the correct visual space for the rotated SVG.
+     aspect-ratio H/W (5472/9967) so height = width × W/H ≈ 1.82× (portrait). */
+  .entry .section1 .entry-mosaic:not(:has(#map)) .mosaic-portrait-wrapper,
+  .entry .entry-main-panel .entry-mosaic:not(:has(#map)) .mosaic-portrait-wrapper {
+    width: 100%;
+    aspect-ratio: 5472 / 9967;
+    position: relative;
+    overflow: hidden;
+    border-radius: 30px;
+  }
+
+  /* SVG is sized to its natural landscape dimensions and rotated 90° to portrait.
+     After rotation: visual width = SVG height = wrapper width ✓
+                     visual height = SVG width  = wrapper height ✓ */
+  .entry .section1 .entry-mosaic:not(:has(#map)) .mosaic-portrait-wrapper svg,
+  .entry .entry-main-panel .entry-mosaic:not(:has(#map)) .mosaic-portrait-wrapper svg {
+    position: absolute;
+    width: calc(100% * 9967 / 5472);   /* = wrapper height (the landscape width) */
+    height: calc(100% * 5472 / 9967);  /* = wrapper width  (the landscape height) */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  /* Lightbox: show mosaic_entry SVG portrait on mobile */
+  .lightbox.is-svg .lightbox-media .shapes_entry {
+    width: 80vh;
+    height: auto;
     transform: rotate(90deg);
+    transform-origin: center center;
   }
 
   .entry .section1 .entry-mosaic:has(#map),

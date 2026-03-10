@@ -105,7 +105,7 @@
       });
     });
 
-    document.querySelectorAll('.entry-mosaic').forEach(function (mosaic) {
+    document.querySelectorAll('.entry-mosaic.lightbox-trigger').forEach(function (mosaic) {
       mosaic.addEventListener('click', function () {
         var svg = mosaic.querySelector('svg');
         openWithSvg(svg);

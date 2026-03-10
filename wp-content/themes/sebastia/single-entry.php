@@ -77,7 +77,9 @@
       <div class="space"><?php echo $order; ?>c</div>
 
       <div class="entry-mosaic lightbox-trigger">
-        <?php include get_template_directory() . '/partials/mosaic_entry.svg.php'; ?>
+        <div class="mosaic-portrait-wrapper">
+          <?php include get_template_directory() . '/partials/mosaic_entry.svg.php'; ?>
+        </div>
       </div>
 
       <div class="space"><?php echo $order; ?>d</div>
