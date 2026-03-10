@@ -1,0 +1,182 @@
+/* Foundations: fonts, variables, reset, header/language baseline */
+@font-face {
+    font-family: Arketa;
+    src: url(fonts/OOArketaTrial-Regular.otf) format("opentype");
+}
+
+@font-face {
+    font-family: Install;
+    src: url(fonts/Akzidenz\ Grotesk\ Pro\ Med\ Regular.otf) format("opentype");
+}
+
+@font-face {
+    font-family: Etude;
+    src: url(fonts/Etude-Trial-Regular.otf) format("opentype");
+}
+
+@font-face {
+    font-family: Lisong;
+    src: url(fonts/LiSong\ Pro.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Install;
+    src: url(fonts/Install-trial-Semibold.otf) format("opentype");
+}
+
+@font-face {
+    font-family: Install Light;
+    src: url(fonts/Install-trial-Regular.otf) format("opentype");
+}
+
+:root {
+  --red: #ff734e;
+  --white: #e1d5ca;
+  --card: #e1d5ca;
+  --highlight: #ff734e;
+  --blue: #403495;
+  --brown: #c5b8ac;
+  --foreground: #b4a59b;
+  --bg-blend: multiply;
+  --fg-blend: screen;
+  --opacity: 1;
+  --blur: 0px;
+  --stone-sheet-collapsed-height: 7rem;
+  --stone-sheet-expanded-height: 50vh;
+}
+
+
+::selection {
+  background-color: var(--red); 
+  color: #000000;        
+}
+
+::-moz-selection {
+  background-color: var(--red);
+  color: #000000;
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Arketa', sans-serif;
+  margin: 0;
+  font-weight: 100;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: 'Arketa', sans-serif;
+  background-color: var(--white);
+
+}
+
+main {
+    outline: 1px solid var(--blue);
+    outline-offset: -0.5px;
+    background-color: var(--brown);
+    overflow: hidden;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  height: 9vh;
+  gap: 1rem;
+}
+
+.not-home  {
+  background-color: var(--brown);
+ outline: 1px solid var(--blue);
+    outline-offset: -0.5px;
+}
+
+.header-home {
+  background-color: var(--white);
+  
+ outline: 1px solid var(--blue);
+    outline-offset: -0.5px;
+
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-family: 'Install', sans-serif;
+  text-transform: uppercase;
+}
+
+header h1 a {
+  text-decoration: none;
+  color: black;
+  transition: all 0.2s ease-in-out;
+}
+
+header h1 a:hover {
+  color: var(--red);  
+}
+
+.languages {
+  position: static;
+  margin-left: 0;
+  justify-content: center;
+  font-family: Arketa;
+}
+
+.header > .languages {
+  display: flex;
+  align-items: center;
+}
+
+.header > .page-menu + .languages::before {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1.5em;
+  margin: 0 0.6rem 0 0.8rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 2px 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2 20'%3E%3Cline x1='1' y1='0' x2='1' y2='20' stroke='black' stroke-width='1.2' /%3E%3C/svg%3E");
+}
+
+.languages ul {
+  display: flex;
+  gap: 0;
+    margin: 0;
+  padding: 0;
+}
+
+.languages ul li {
+  list-style: none;
+  text-transform: uppercase;
+  background-color: transparent;
+}
+
+.languages ul li a {
+  text-decoration: none;
+  color: var(--red);
+  transition: all 0.2s ease-in-out ;
+  font-family: Install;
+}
+
+.languages ul li a:hover {
+  color: var(--blue);
+}
+
+
+.languages ul li.active a {
+  color: var(--blue);
+  text-decoration: underline;
+}

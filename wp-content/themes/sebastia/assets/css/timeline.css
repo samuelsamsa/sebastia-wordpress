@@ -1,0 +1,226 @@
+/* Timeline page */
+/* ===== Timeline container ===== */
+
+.timeline {
+  margin-top: 9vh;
+  overflow: auto;
+  box-sizing: border-box;
+  height: calc(100vh - 9vh);
+  background: var(--white);
+  font-family: Arketa;
+}
+
+/* ===== Timeline grid ===== */
+
+.timeline-grid {
+  display: grid;
+  grid-template-columns: 20vw repeat(200, 4rem);
+  position: relative;
+  align-items: center;
+  width: max-content;
+  padding-right: 1em;
+  padding-bottom: 1em;
+  background-color: var(--brown);
+}
+
+/* ===== Year header row ===== */
+
+.year {
+  text-align: center;
+  font-size: 0.7rem;
+  color: black;
+  background: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  padding: 0.5em;
+  transition: all 0.2s ease-in-out ;
+}
+
+/* Decade vertical lines */
+.decade-marker {
+  grid-row: 2 / -1;  /* span all rows below the header */
+  border-left: 1px solid rgba(65,105,225,0.3);
+  pointer-events: none;
+}
+
+/* Empty spacer in column 1 (implicit) */
+.timeline-grid > :first-child {
+  grid-column: 1 / 2;
+      width: 100%;
+    height: 100%;
+    background-color: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    gap: 0.5em;
+}
+
+.timeline-controls {
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  background: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  left: 0;
+  justify-content: center;
+}
+
+.timeline-controls button {
+  font-size: 0.7rem;
+  padding-left: 0.5em;
+  cursor: pointer;
+  border: none;
+  box-shadow: none;
+  font-family: Arketa;
+  font-feature-settings: 'case';
+  background-color: var(--blue);
+  color: var(--white);
+  padding: 0.1rem 0.4rem;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out ;
+}
+
+.timeline-controls button:hover {
+  background-color: var(--red);
+}
+
+/* ===== Entry titles ===== */
+
+.entry-title {
+  grid-column: 1 / 2;
+  font-family: Arketa;
+  font-size: 0.8rem;
+  padding-right: 1rem;
+  text-align: left;
+  white-space: nowrap;
+
+  position: sticky;
+  left: 0;       /* stick horizontally */
+  top: auto;     /* don’t stick vertically */
+  z-index: 3;
+      height: 2rem;
+    align-items: center;
+    display: flex;
+}
+
+.entry-title a {
+  text-decoration: none;
+  color: black;
+}
+
+.entry-title a:hover {
+  color: var(--red);
+}
+
+.entry-title span {
+  background-color: var(--white);
+  padding-left: 1em;
+  padding-right: 1em;
+  transition: all 0.2s ease-in-out ;
+}
+
+/* ===== Timeline cells ===== */
+
+.entry-time {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--year-count), 1fr);
+    height: 2rem; /* adjust as needed */
+    grid-column: 2 / 74;
+     justify-items: center;
+}
+
+
+
+
+.dot, .range, .approx {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+        position: absolute;
+
+    background: var(--blue);
+    border-radius: 50%;
+    justify-self: center;
+}
+
+.approx {
+    width: 8px;
+    height: 8px;
+        position: absolute;
+
+    border: 2px solid var(--blue);
+    background: transparent;
+    border-radius: 50%;
+    justify-self: center;
+}
+
+.range {
+    height: 2px;
+    background: var(--blue);
+    justify-self: stretch;
+    position: relative;
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+}
+
+
+
+.range::before { left: 0; }
+.range::after  { right: 0; }
+
+.timeline-row {
+    display: contents; /* allows the child divs to participate in the grid */
+    text-decoration: none; /* remove underline */
+    color: inherit;
+    cursor: pointer;
+}
+
+.timeline-row:hover .entry-title span {
+    color: var(--white);
+    background-color: var(--red);
+}
+
+.timeline-row .dot,
+.timeline-row .range,
+.timeline-row .range::before,
+.timeline-row .range::after {
+    transition: all 0.2s ease-in-out ;
+}
+
+.timeline-row:hover .dot,
+.timeline-row:hover .range,
+.timeline-row:hover .range::before,
+.timeline-row:hover .range::after {
+    background: var(--red);
+}
+
+.timeline-row .entry-title,
+.timeline-row .entry-time {
+  opacity: 0;
+  transform: translateY(16px);
+   border-bottom: 1px solid var(--white);
+}
+
+.timeline-row.is-visible .entry-title,
+.timeline-row.is-visible .entry-time {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.5s cubic-bezier(.2,.8,.2,1),
+    transform 0.5s cubic-bezier(.2,.8,.2,1);
+}
+
+
+.year.highlight {
+  color: var(--highlight);
+  text-decoration: underline;
+}

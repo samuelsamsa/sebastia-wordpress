@@ -1,0 +1,35 @@
+# WordPress core — install fresh, not tracked
+wp-admin/
+wp-includes/
+wp-*.php
+xmlrpc.php
+index.php
+license.txt
+readme.html
+
+# Environment config — contains DB credentials
+wp-config.php
+
+# Uploads — too large for git; share separately
+wp-content/uploads/
+
+# Third-party plugins — install from WordPress.org (see README)
+wp-content/plugins/
+
+# All themes except the custom one
+wp-content/themes/*
+!wp-content/themes/sebastia/
+
+# Cache / generated
+wp-content/cache/
+wp-content/upgrade/
+wp-content/backups/
+
+# OS / editor noise
+.DS_Store
+.DS_Store?
+Thumbs.db
+.idea/
+.vscode/
+*.log
+node_modules/

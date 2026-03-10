@@ -1,0 +1,115 @@
+/* About page */
+
+/* ── Outer grid ─────────────────────────────────────────────────────────── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 4.5vw 1fr 4.5vw;
+  gap: 0;
+  background-color: var(--white);
+}
+
+/* All direct children go in the center column */
+.about-grid > * {
+  grid-column: 2 / 3;
+}
+
+/* ── Gutenberg: Columns block = a row ───────────────────────────────────── */
+.about-grid .wp-block-columns {
+  display: flex;
+  gap: 0;
+  margin-bottom: 0;
+}
+
+/* ── Column ─────────────────────────────────────────────────────────────── */
+.about-grid .wp-block-column {
+  outline: 1px solid var(--blue);
+  outline-offset: -0.5px;
+  padding: 0.5em;
+  min-width: 0;
+}
+
+.about-grid .wp-block-column:has(p) {
+  padding: 2em;
+}
+
+/* ── Typography ─────────────────────────────────────────────────────────── */
+.about-grid h1 {
+  font-family: 'Install', sans-serif;
+  font-size: 4em;
+  line-height: 1.2;
+  padding: 1em;
+  text-align: center;
+}
+
+.about-grid h2 {
+  font-family: 'Install', sans-serif;
+  font-size: 2em;
+  line-height: 1.2;
+}
+
+.about-grid p {
+  font-family: 'Install Light', sans-serif;
+  font-size: 1.1em;
+  line-height: 1.5;
+}
+
+.about-grid p:first-child { margin-block-start: 0; }
+.about-grid p:last-child  { margin-block-end: 0; }
+
+/* ── Images ─────────────────────────────────────────────────────────────── */
+.about-grid figure {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-grid figure img,
+.about-grid .wp-block-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 30px;
+  mix-blend-mode: multiply;
+}
+
+/* ── Figcaption (hover reveal) ──────────────────────────────────────────── */
+.about-grid figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0.5em 1em;
+  background: var(--white);
+  color: black;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  font-size: 0.7rem;
+  border-radius: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  margin: 1em;
+}
+
+.about-grid figure:hover figcaption,
+.about-grid figure:focus-within figcaption,
+.about-grid figure.is-caption-visible figcaption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Fade-in animation ──────────────────────────────────────────────────── */
+.about-grid .wp-block-column > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 600ms cubic-bezier(.2,.8,.2,1),
+    transform 600ms cubic-bezier(.2,.8,.2,1);
+  will-change: opacity, transform;
+}
+
+.about-grid .wp-block-column > *.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

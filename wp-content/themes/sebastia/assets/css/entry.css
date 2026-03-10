@@ -1,0 +1,332 @@
+/* Entry layouts and shared stone panel content */
+#stone-panel {
+  height: 100%;
+  overflow-y: auto;
+  background: rgb(246, 248, 247);
+}
+
+.entry-card {
+  font-family: 'Arketa', sans-serif;
+    width: 30vw;
+  min-height: 100%;
+  box-sizing: border-box;
+  font-size: 0.8rem;
+  line-height: 150%;
+  display: grid;
+  grid-template-columns: 2.5vw 1fr 1fr;
+  outline: 1px solid var(--blue);
+    outline-offset: -0.5px;
+    position: relative;
+    background-color: var(--white);
+}
+
+.entry {
+  font-family: 'Arketa', sans-serif;
+    width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  font-size: 0.8rem;
+  line-height: 150%;
+  display: grid;
+  grid-template-columns: 5vw 1fr 1fr 50vw;
+  overflow-y: scroll;
+  outline: 1px solid var(--blue);
+  outline-offset: -0.5px;
+}
+
+.entry-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  margin-top: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  padding: 0;
+  line-height: 0;
+}
+
+
+.entry-close svg {
+  display: block;
+}
+
+.entry-close svg path {
+  transition: stroke 0.25s ease;
+  stroke: black;
+}
+
+.entry-close:hover svg path {
+  stroke: var(--red);
+}
+
+.section1,
+.entry-main-panel {
+  grid-column: 1/4;
+  display: grid;
+  grid-template-columns: 4.5vw 1fr 1fr;
+  grid-template-rows: auto auto auto auto 1fr;
+    outline: 1px solid var(--blue);
+    outline-offset: -0.5px;
+    z-index: 10;
+}
+
+.section1 .entry-mosaic,
+.entry-main-panel .entry-mosaic {
+  grid-column: 2/4;
+outline: 1px solid var(--blue);
+  outline-offset: -0.5px;
+  background-color: var(--white);
+  cursor: pointer;
+  padding: 1em;
+
+}
+
+.section1 .entry-mosaic:has(#map),
+.entry-main-panel .entry-mosaic:has(#map) {
+  cursor: unset;
+  position: relative;
+}
+
+.section1 .entry-mosaic #map,
+.entry-main-panel .entry-mosaic #map {
+  cursor: unset;
+}
+
+
+
+.section1 .entry-mosaic svg,
+.entry-main-panel .entry-mosaic svg {
+  transform: scale(1);
+  transition: all 0.3s ease-in-out;
+  background-color: var(--brown);
+  border-radius: 30px;
+  display: block;
+}
+
+.section1 .entry-mosaic svg:hover,
+.entry-main-panel .entry-mosaic svg:hover {
+  border-radius: 0;
+}
+
+.entry-card [data-fade] {
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.entry-card [data-fade].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.header [data-fade] {
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.header [data-fade].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.section2,
+.entry-media-panel {
+  grid-column: 4/5;
+   display: grid;
+   grid-template-columns: 1fr 4.5vw;
+}
+
+.entry-background {
+  height: auto ;
+  width: 100vw;
+  margin-top: 9vh; /* below main header */
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 9vh); /* fill viewport below header */
+  overflow: scroll; 
+}
+
+.entry-card header, li, .notes, .gallery {
+  background-color: var(--card);
+  padding: 0.4rem;
+}
+
+.entry-card header {
+  grid-column: 2/4;
+  margin: 0;
+  padding-bottom: 1rem;
+  padding-top: 1.5rem;
+  outline: 1px solid var(--blue);
+    outline-offset: -0.5px;
+  color: var(--blue);
+}
+
+.space {
+  grid-column: 1/2;
+    background-color:var(--card);
+    color: var(--blue);
+    padding: 0.2rem;
+    text-align: right;
+    font-size: 0.7rem;
+    outline: 1px solid var(--blue);
+      outline-offset: -0.5px;
+}
+
+.space-right {
+  grid-column: 2/3;
+    background-color:var(--card);
+    color: var(--blue);
+    padding: 0.2rem;
+    text-align: left;
+    font-size: 0.7rem;
+        outline: 1px solid var(--blue);
+    outline-offset: -0.5px;
+}
+
+.entry-card h2 {
+font-family: 'Arketa', sans-serif;
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  line-height: 130%;
+  max-width: 85%;
+}
+
+.entry-card .meta {
+  grid-column: 2/4;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+
+
+.entry-card li {
+  display: flex;
+  flex-direction: column;
+  outline: 1px solid var(--blue);
+    outline-offset: -0.5px;
+  min-height: 8vh;
+}
+
+.entry-card .notes {
+  margin-bottom: 0;
+  grid-column: 2/4;
+  padding-bottom: 1em;
+    outline: 1px solid var(--blue);
+      outline-offset: -0.5px;
+}
+
+.entry-card .notes p {
+  margin: 0 0 1em 0;
+}
+
+.entry-card a {
+  text-decoration: none;
+  color: black;
+  background-color: var(--highlight);
+  transition: all 0.2s ease-in-out;
+  padding: 0 0.2em;
+  font-family: 'Install';
+  transform: translateX(0);
+}
+
+.entry-card a::after {
+  content: "↗";
+  margin-left: 0.3em;
+  text-transform: uppercase;
+}
+
+.entry-card a:hover {
+  color: var(--white);
+}
+
+.entry-label {
+  font-size: 0.9em;
+    color: var(--blue);
+    text-transform: uppercase;
+    font-family: Install;
+}
+
+.entry-card .gallery {
+  column-count: 2;        /* Number of columns */
+  column-gap: 0;
+  grid-column: 2/4;
+    outline: 1px solid var(--blue);
+      outline-offset: -0.5px;
+      padding: 0;
+}
+
+.entry-gallery {       /* Number of columns */
+  grid-column: 1/2 !important;
+  flex-direction: column;
+}
+
+.entry-card .gallery figure {
+  display: inline-block;   /* Inline-block so columns wrap properly */
+  width: 100%;             /* Full column width */
+  margin: 0;
+  margin-bottom: 0;
+  cursor: pointer;
+  aspect-ratio: 1 / 1;
+    padding: 1em;
+    box-sizing: border-box;
+    display: flex;
+        align-items: center;
+    justify-content: center;
+    overflow: hidden;
+     outline: 1px solid var(--blue);
+      outline-offset: -0.5px;
+}
+
+.entry .gallery figure {
+  margin-bottom: 0;
+  cursor: pointer;
+  aspect-ratio: 1 / 1;
+    padding: 1em;
+    box-sizing: border-box;
+    display: flex;
+        align-items: center;
+    justify-content: center;
+    overflow: hidden;
+      background-color: var(--white);
+}
+
+
+
+.entry-card .gallery > :nth-child(5n) {
+    column-span: all;
+    break-inside: avoid;
+}
+
+
+ 
+.entry-gallery figure {
+  position: relative;
+  overflow: hidden;
+  outline: 1px solid var(--blue);
+    outline-offset: -0.5px;
+}
+.entry-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 30px;
+  transition: filter 0.4s ease, border-radius 0.3s ease;
+  mix-blend-mode: multiply;
+}
+
+.entry-gallery figure:hover img {
+  filter: none;
+  opacity: 1;
+  border-radius: 0;
+}

@@ -1,0 +1,124 @@
+/* Gallery page */
+.gallery-wrapper {
+  width: 100vw;
+    margin-top: 9vh;
+      height: calc(91vh);
+    overflow: visible;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.gallery-entries-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-auto-flow: dense;
+  overflow-y: scroll;
+}
+
+.gallery-entry-item.is-large {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+
+.gallery-entry-item {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  outline: 1px solid var(--blue);
+    outline-offset: -0.5px;
+    aspect-ratio: 1 / 1;
+    background-color: var(--white);
+    transition: all 0.3s ease-in-out;
+}
+
+.gallery-entry-image-wrapper {
+  padding: 0.5em;
+  background-color: var(--white);
+    transition: all 0.3s ease-in-out;
+}
+
+.gallery-wrapper .gallery-entry-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 30px;
+  opacity: 1;
+  transition: all 0.3s ease-in-out  ;
+  mix-blend-mode: multiply;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+  aspect-ratio: 1 / 1;
+}
+
+.gallery-entry-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.gallery-entry-image-wrapper {
+  position: relative;
+    outline: 1px solid var(--blue);
+    outline-offset: -0.5px;
+}
+
+.gallery-entry-title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5em;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+  font-size: 0.7rem;
+}
+
+.gallery-entry-title p {
+  margin: 0;
+  color: black;
+  font-family: Arketa;
+  background-color: var(--white);
+  padding: 0.2em 0.5em;
+  border-radius: 10px;
+}
+
+
+.gallery-entry-link:hover .gallery-entry-title {
+  opacity: 1;
+}
+
+.gallery-entry-link:hover img {
+  border-radius: 0;
+}
+
+.gallery-entry-item:hover img {
+  border-radius: 0;
+}
+.gallery-entry-item {
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+}
+
+.gallery-entry-item.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity 0.6s cubic-bezier(.2,.8,.2,1),
+    transform 0.6s cubic-bezier(.2,.8,.2,1);
+}
+
+
+.gallery-entry-item {
+  will-change: transform, opacity;
+}
