@@ -69,10 +69,6 @@ In the WordPress admin go to **Plugins → Add New** and install:
 
 Go to **Appearance → Themes** and activate **Sebastia**.
 
-### 8 — Get the images
-
-Uploaded images are not in this repo (1.3 GB). Ask the project owner to share the `wp-content/uploads/entries/` folder and place it at the same path on your local install. Without images the site works but entry galleries will be empty.
-
 ---
 
 ## Theme overview

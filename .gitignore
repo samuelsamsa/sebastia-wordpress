@@ -10,8 +10,9 @@ readme.html
 # Environment config — contains DB credentials
 wp-config.php
 
-# Uploads — too large for git; share separately
-wp-content/uploads/
+# Uploads — track entry images; exclude WP-generated thumbnails and yearly uploads
+wp-content/uploads/[0-9]*/
+wp-content/uploads/sites/
 
 # Third-party plugins — install from WordPress.org (see README)
 wp-content/plugins/
