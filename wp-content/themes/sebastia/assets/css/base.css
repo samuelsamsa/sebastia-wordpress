@@ -6,21 +6,6 @@
 
 @font-face {
     font-family: Install;
-    src: url(fonts/Akzidenz\ Grotesk\ Pro\ Med\ Regular.otf) format("opentype");
-}
-
-@font-face {
-    font-family: Etude;
-    src: url(fonts/Etude-Trial-Regular.otf) format("opentype");
-}
-
-@font-face {
-    font-family: Lisong;
-    src: url(fonts/LiSong\ Pro.ttf) format("truetype");
-}
-
-@font-face {
-    font-family: Install;
     src: url(fonts/Install-trial-Semibold.otf) format("opentype");
 }
 
