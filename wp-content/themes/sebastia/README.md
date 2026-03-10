@@ -1,8 +1,5 @@
 # Sebastia — WordPress theme
 
-Custom theme for Jumana Manna's artwork site. Converted from Kirby CMS.
-
----
 
 ## Content type: Entry
 
