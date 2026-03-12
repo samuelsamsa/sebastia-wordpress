@@ -10,6 +10,16 @@ add_action('wp_enqueue_scripts', function () {
 
 get_header();
 
+// Map a raw year to its display bucket:
+// pre-1800 → nearest century (1572→1500, 1665→1600)
+// 1800+    → nearest decade  (1848→1840, 1989→1980)
+function sebastia_year_to_bucket(int $year): int {
+    if ($year < 1800) {
+        return (int)(floor($year / 100) * 100);
+    }
+    return (int)(floor($year / 10) * 10);
+}
+
 $entries_q = sebastia_get_entries();
 $parsed    = [];
 
@@ -55,31 +65,32 @@ while ($entries_q->have_posts()) {
 }
 wp_reset_postdata();
 
-$year_array = [];
+// Collect unique buckets from all events
+$bucket_set = [];
 foreach ($parsed as $item) {
     foreach ($item['events'] as $event) {
         if ($event['type'] === 'dot') {
-            $year_array[] = $event['year'];
+            $bucket_set[] = sebastia_year_to_bucket($event['year']);
         } elseif ($event['type'] === 'range') {
-            $year_array[] = $event['start'];
-            $year_array[] = $event['end'];
+            $bucket_set[] = sebastia_year_to_bucket($event['start']);
+            $bucket_set[] = sebastia_year_to_bucket($event['end']);
         }
     }
 }
 
-$year_array = array_values(array_unique($year_array));
-sort($year_array);
-$year_count = count($year_array);
+$buckets = array_values(array_unique($bucket_set));
+sort($buckets);
+$bucket_count = count($buckets);
 
-$year_to_col = [];
-foreach ($year_array as $i => $year) {
-    $year_to_col[$year] = $i + 1;
+$bucket_to_col = [];
+foreach ($buckets as $i => $bucket) {
+    $bucket_to_col[$bucket] = $i + 1;
 }
 ?>
 
 <section class="timeline">
   <div class="timeline-grid"
-       style="--year-count: <?php echo $year_count; ?>; grid-template-columns: 10rem repeat(<?php echo $year_count; ?>, 3rem);"
+       style="--year-count: <?php echo $bucket_count; ?>; grid-template-columns: 10rem repeat(<?php echo $bucket_count; ?>, 1fr);"
        data-fade>
 
     <div class="timeline-controls" style="grid-column: 1 / 2;">
@@ -87,39 +98,43 @@ foreach ($year_array as $i => $year) {
       <button id="sortAlphaButton" data-order="asc">A-Z ↑</button>
     </div>
 
-    <?php foreach ($year_array as $year): ?>
-    <div class="year" data-year="<?php echo $year; ?>"><?php echo $year; ?></div>
+    <?php foreach ($buckets as $bucket): ?>
+    <div class="year" data-year="<?php echo $bucket; ?>"><?php echo $bucket; ?></div>
     <?php endforeach; ?>
 
     <?php foreach ($parsed as $item):
-        $first_year = null;
+        $first_bucket = null;
         foreach ($item['events'] as $event) {
-            if ($event['type'] === 'dot')   { $first_year = $event['year'];  break; }
-            if ($event['type'] === 'range') { $first_year = $event['start']; break; }
+            if ($event['type'] === 'dot')   { $first_bucket = sebastia_year_to_bucket($event['year']);  break; }
+            if ($event['type'] === 'range') { $first_bucket = sebastia_year_to_bucket($event['start']); break; }
         }
 
-        $row_years = [];
+        $row_buckets = [];
         foreach ($item['events'] as $event) {
-            if ($event['type'] === 'dot')   $row_years[] = $event['year'];
-            if ($event['type'] === 'range') { $row_years[] = $event['start']; $row_years[] = $event['end']; }
+            if ($event['type'] === 'dot') {
+                $row_buckets[] = sebastia_year_to_bucket($event['year']);
+            } elseif ($event['type'] === 'range') {
+                $row_buckets[] = sebastia_year_to_bucket($event['start']);
+                $row_buckets[] = sebastia_year_to_bucket($event['end']);
+            }
         }
-        $row_years = array_unique($row_years);
+        $row_buckets = array_unique($row_buckets);
     ?>
     <a href="<?php echo esc_url($item['url']); ?>"
        class="timeline-row"
-       data-years="<?php echo implode(',', $row_years); ?>"
+       data-years="<?php echo implode(',', $row_buckets); ?>"
        data-fade>
       <div class="entry-title"><span><?php echo esc_html($item['title']); ?></span></div>
 
-      <div class="entry-time" data-start="<?php echo $first_year; ?>">
+      <div class="entry-time" data-start="<?php echo $first_bucket; ?>">
         <?php foreach ($item['events'] as $event):
             if ($event['type'] === 'dot') {
-                $col_start = $year_to_col[$event['year']] ?? 2;
+                $col_start = $bucket_to_col[sebastia_year_to_bucket($event['year'])] ?? 2;
                 $col_end   = $col_start + 1;
                 $class     = $event['approx'] ? 'dot approx' : 'dot';
             } else {
-                $col_start = $year_to_col[$event['start']] ?? 2;
-                $col_end   = ($year_to_col[$event['end']] ?? $col_start) + 1;
+                $col_start = $bucket_to_col[sebastia_year_to_bucket($event['start'])] ?? 2;
+                $col_end   = ($bucket_to_col[sebastia_year_to_bucket($event['end'])] ?? $col_start) + 1;
                 $class     = 'range';
             }
         ?>

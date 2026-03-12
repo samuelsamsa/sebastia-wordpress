@@ -153,7 +153,7 @@ outline: 1px solid var(--blue);
   overflow: scroll; 
 }
 
-.entry-card header, li, .notes, .gallery {
+.entry-card header, li, .notes {
   background-color: var(--card);
   padding: 0.4rem;
 }
@@ -170,7 +170,7 @@ outline: 1px solid var(--blue);
 
 .space {
   grid-column: 1/2;
-    background-color:var(--card);
+    background-color:var(--white);
     color: var(--blue);
     padding: 0.2rem;
     text-align: right;
@@ -181,7 +181,7 @@ outline: 1px solid var(--blue);
 
 .space-right {
   grid-column: 2/3;
-    background-color:var(--card);
+    background-color:var(--white);
     color: var(--blue);
     padding: 0.2rem;
     text-align: left;

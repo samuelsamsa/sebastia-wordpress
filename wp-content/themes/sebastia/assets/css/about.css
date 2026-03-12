@@ -22,14 +22,18 @@
 
 /* ── Column ─────────────────────────────────────────────────────────────── */
 .about-grid .wp-block-column {
-  outline: 1px solid var(--blue);
-  outline-offset: -0.5px;
   padding: 0.5em;
   min-width: 0;
+  align-content: center;
+
 }
 
 .about-grid .wp-block-column:has(p) {
   padding: 2em;
+}
+
+.about-grid .wp-block-column:has(table) {
+  padding: 0;
 }
 
 /* ── Typography ─────────────────────────────────────────────────────────── */
@@ -43,14 +47,42 @@
 
 .about-grid h2 {
   font-family: 'Install', sans-serif;
-  font-size: 2em;
+  font-size: 2.5em;
   line-height: 1.2;
+  padding: 0.5em;
 }
 
 .about-grid p {
   font-family: 'Install Light', sans-serif;
   font-size: 1.1em;
   line-height: 1.5;
+}
+
+.about-grid p strong{
+  font-family: 'Install', sans-serif;
+}
+
+.about-grid p em {
+  color: var(--blue);
+  font-style: normal;
+}
+
+.about-grid a {
+  text-decoration: none;
+    color: black;
+    background-color: var(--highlight);
+    transition: all 0.2s ease-in-out;
+    padding: 0 0.2em;
+}
+
+.about-grid a::after {
+    content: "↗";
+    margin-left: 0.3em;
+    text-transform: uppercase;
+}
+
+.about-grid a:hover {
+  color: var(--white);
 }
 
 .about-grid p:first-child { margin-block-start: 0; }
@@ -97,6 +129,24 @@
 .about-grid figure.is-caption-visible figcaption {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ── Colophon ──────────────────────────────────────────────────── */
+
+table td {
+  border: none !important;
+  align-content: flex-start;
+  text-align: left;
+  font-family: Install Light, sans-serif;
+  font-size: 1.1em;
+}
+
+table tr {
+  border-bottom: 1px solid var(--blue);
+}
+
+table strong {
+  font-family: Install, sans-serif;
 }
 
 /* ── Fade-in animation ──────────────────────────────────────────────────── */

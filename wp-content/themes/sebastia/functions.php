@@ -2,6 +2,14 @@
 // ─── Disable admin bar on frontend ────────────────────────────────────────────
 add_filter('show_admin_bar', '__return_false');
 
+// ─── Register entry CPT with Polylang ─────────────────────────────────────────
+// This gives entry URLs a language prefix: /no/entry/slug/ and /en/entry/slug/
+// so Polylang can detect the current language on entry pages.
+add_filter('pll_get_post_types', function (array $types): array {
+    $types['entry'] = 'entry';
+    return $types;
+});
+
 // ─── Custom post type ─────────────────────────────────────────────────────────
 add_action('init', function () {
     register_post_type('entry', [
@@ -103,8 +111,8 @@ function sebastia_meta(string $key): string {
 }
 
 // ─── Get all entries ordered by menu_order for the index ─────────────────────
-function sebastia_get_entries(): WP_Query {
-    $lang     = function_exists('pll_current_language') ? pll_current_language() : 'no';
+function sebastia_get_entries(string $lang_override = ''): WP_Query {
+    $lang     = $lang_override ?: (function_exists('pll_current_language') ? pll_current_language() : 'no');
     $lang_val = $lang === 'en' ? 'en' : 'no';
 
     return new WP_Query([

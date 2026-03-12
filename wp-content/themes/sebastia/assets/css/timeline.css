@@ -17,10 +17,9 @@
   grid-template-columns: 20vw repeat(200, 4rem);
   position: relative;
   align-items: center;
-  width: max-content;
-  padding-right: 1em;
   padding-bottom: 1em;
   background-color: var(--brown);
+  width: 100%;
 }
 
 /* ===== Year header row ===== */
@@ -168,8 +167,8 @@
     background: var(--blue);
     justify-self: stretch;
     position: relative;
-    margin-left: 1.25rem;
-    margin-right: 1.25rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
 }
 
 

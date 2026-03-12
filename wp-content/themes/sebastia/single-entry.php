@@ -19,7 +19,10 @@
     $base_slug = preg_replace('/-en$/', '', $slug);
 
     // Build entry titles + URLs map for JS (navigation between entries)
-    $entries_query = sebastia_get_entries();
+    // Use the entry's own _entry_lang meta — Polylang can't detect language from
+    // entry CPT URLs (/entry/slug/) since they lack a /en/ or /no/ prefix.
+    $entry_lang    = get_post_meta($id, '_entry_lang', true) ?: 'no';
+    $entries_query = sebastia_get_entries($entry_lang);
     $entry_titles  = [];
     $entry_urls    = [];
     foreach ($entries_query->posts as $e) {
@@ -76,19 +79,20 @@
 
       <div class="space"><?php echo $order; ?>c</div>
 
-      <div class="entry-mosaic lightbox-trigger">
-        <div class="mosaic-portrait-wrapper">
-          <?php include get_template_directory() . '/partials/mosaic_entry.svg.php'; ?>
-        </div>
-      </div>
-
-      <div class="space"><?php echo $order; ?>d</div>
-
       <?php if (get_the_content()): ?>
       <section class="notes">
         <?php the_content(); ?>
       </section>
       <?php endif; ?>
+
+      <div class="space"><?php echo $order; ?>d</div>
+
+       <div class="entry-mosaic lightbox-trigger">
+        <div class="mosaic-portrait-wrapper">
+          <?php include get_template_directory() . '/partials/mosaic_entry.svg.php'; ?>
+        </div>
+      </div>
+      
       <div class="space"><?php echo $order; ?>e</div>
 
       <div class="entry-mosaic">

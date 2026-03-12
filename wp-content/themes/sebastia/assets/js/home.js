@@ -35,6 +35,7 @@
     var moved = false;
     var activeSlug = null;
     var searchOpen = false;
+    var hoverEnabled = false;
     var headerResizeObserver = null;
     var magnifierPath = 'M11 4a7 7 0 1 1 0 14 7 7 0 0 1 0-14zm5 12l5 5';
     var closePath = 'M4 4l16 16M20 4L4 20';
@@ -69,7 +70,10 @@
             lines.classList.add('is-visible');
             window.setTimeout(function () {
               drone.classList.add('is-visible');
-            }, 1200);
+              window.setTimeout(function () {
+                hoverEnabled = true;
+              }, 600); // match CSS opacity transition duration
+            }, 400);
           }, 100);
         }, 100);
       }, 1200);
@@ -424,12 +428,14 @@
       if (!isTouchPointer) {
         polygons.forEach(function (path) {
           path.addEventListener('mouseenter', function () {
+            if (!hoverEnabled) return;
             if (activeSlug !== group.dataset.name) {
               group.classList.add('active');
             }
           });
 
           path.addEventListener('mouseleave', function () {
+            if (!hoverEnabled) return;
             if (activeSlug !== group.dataset.name) {
               group.classList.remove('active');
             }

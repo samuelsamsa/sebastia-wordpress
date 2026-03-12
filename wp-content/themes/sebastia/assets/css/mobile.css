@@ -212,6 +212,10 @@
     -webkit-overflow-scrolling: touch;
   }
 
+  .timeline-grid {
+    width: fit-content;
+  }
+
   /* Timeline header row sticks to the top edge of the timeline scroll container */
   .timeline .timeline-controls,
   .timeline .year,

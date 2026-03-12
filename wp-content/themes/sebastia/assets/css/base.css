@@ -15,12 +15,12 @@
 }
 
 :root {
-  --red: #ff734e;
-  --white: #e1d5ca;
-  --card: #e1d5ca;
-  --highlight: #ff734e;
-  --blue: #403495;
-  --brown: #c5b8ac;
+  --red: #ff774b;
+  --white: #f1e9d6;
+  --card: #f1e9d6;
+  --highlight: #ff774b;
+  --blue: #3110a3;
+  --brown: #ccbfa5;
   --foreground: #b4a59b;
   --bg-blend: multiply;
   --fg-blend: screen;
